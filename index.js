@@ -5,7 +5,7 @@ var nano = require('nano')('http://barbalex:dLhdMg12@127.0.0.1:5984'),
     oiDb = nano.use('oi'),
     _    = require('underscore');
 
-var objects = [
+var objects_o1o = [
     {
         "_id": "o1o",
         "type": "object",
@@ -113,7 +113,10 @@ var objects = [
             "Jahr": 2009,
             "Typ": 2
         }
-    },
+    }
+];
+
+var objects_o10o = [
     {
         "_id": "o10o",
         "type": "object",
@@ -153,11 +156,117 @@ var objects = [
     }
 ];
 
-var hierarchies = [
+var hierarchies_o10o = [
     {
         "_id": "hh0",
         "type": "hierarchy",
         "parent": null,
+        "projId": "o10o",
+        "name": "Projekte",
+        "nameField": "Projektname",
+        "users": ["z@z.ch"],
+        "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
+        "fields": [
+            {
+                "label": "Projektname",
+                "inputType": "input",
+                "valueList": [],
+                "order": 1,
+                "inputDataType": "text",
+                "standardValue": ""
+            },
+            {
+                "label": "Bemerkungen",
+                "inputType": "textarea",
+                "valueList": [],
+                "order": 1,
+                "inputDataType": "",
+                "standardValue": ""
+            },
+            {
+                "label": "testCheckbox",
+                "inputType": "input",
+                "valueList": [],
+                "order": 1,
+                "inputDataType": "checkbox",
+                "standardValue": ""
+            },
+            {
+                "label": "testCheckboxGroup",
+                "inputType": "input",
+                "valueList": ["value1", "value2", "value3", "value4", "value5"],
+                "order": 1,
+                "inputDataType": "checkboxGroup",
+                "standardValue": ""
+            },
+            {
+                "label": "testCheckboxGroupWithValueListWithLabels",
+                "inputType": "input",
+                "valueList": [{"value": 100, "label": "Abies alba Mill. (Weiss-Tanne)"}, {"value": 150, "label": "Abutilon theophrasti Medik."}],
+                "order": 1,
+                "inputDataType": "checkboxGroup",
+                "standardValue": ""
+            },
+            {
+                "label": "testOptions",
+                "inputType": "input",
+                "valueList": ["value1", "value2", "value3"],
+                "order": 1,
+                "inputDataType": "optionGroup",
+                "standardValue": ""
+            }
+        ]
+    },
+    {
+        "_id": "h111",
+        "type": "hierarchy",
+        "parent": "hh0",
+        "projId": "o10o",
+        "order": 1,
+        "name": "Objekte",
+        "nameField": "Objektname",
+        "users": ["z@z.ch"],
+        "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
+        "fields": [
+            {
+                "label": "Objektname",
+                "inputType": "text",
+                "valueList": [],
+                "order": 1,
+                "inputDataType": "text",
+                "standardValue": ""
+            }
+        ]
+    },
+    {
+        "_id": "h121",
+        "type": "hierarchy",
+        "parent": "h111",
+        "projId": "o10o",
+        "order": 1,
+        "name": "Teilobjekte",
+        "nameField": "Teilobjektname",
+        "users": ["z@z.ch"],
+        "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
+        "fields": [
+            {
+                "label": "Teilobjektname",
+                "inputType": "text",
+                "valueList": [],
+                "order": 1,
+                "inputDataType": "text",
+                "standardValue": ""
+            }
+        ]
+    }
+];
+
+var hierarchies_o1o = [
+    {
+        "_id": "hh0",
+        "type": "hierarchy",
+        "parent": null,
+        "projId": "o1o",
         "name": "Projekte",
         "nameField": "Projektname",
         "users": ["z@z.ch"],
@@ -217,7 +326,7 @@ var hierarchies = [
         "_id": "h11",
         "type": "hierarchy",
         "parent": "hh0",
-        "projIds": ["o1o"],
+        "projId": "o1o",
         "order": 1,
         "name": "Programme",
         "nameField": "Art",
@@ -246,7 +355,7 @@ var hierarchies = [
         "_id": "h21",
         "type": "hierarchy",
         "parent": "h11",
-        "projIds": ["o1o"],
+        "projId": "o1o",
         "order": 1,
         "name": "Populationen",
         "nameField": "Name",
@@ -275,7 +384,7 @@ var hierarchies = [
         "_id": "h31",
         "type": "hierarchy",
         "parent": "h21",
-        "projIds": ["o1o"],
+        "projId": "o1o",
         "order": 1,
         "name": "Teilpopulationen",
         "nameField": "Flurname",
@@ -304,7 +413,7 @@ var hierarchies = [
         "_id": "h41",
         "type": "hierarchy",
         "parent": "h31",
-        "projIds": ["o1o"],
+        "projId": "o1o",
         "order": 1,
         "name": "Massnahmen",
         "nameField": "Jahr",
@@ -333,7 +442,7 @@ var hierarchies = [
         "_id": "h42",
         "type": "hierarchy",
         "parent": "h31",
-        "projIds": ["o1o"],
+        "projId": "o1o",
         "order": 2,
         "name": "Feldkontrollen",
         "nameField": "Jahr",
@@ -354,7 +463,7 @@ var hierarchies = [
         "_id": "h43",
         "type": "hierarchy",
         "parent": "h31",
-        "projIds": ["o1o"],
+        "projId": "o1o",
         "order": 3,
         "name": "Teilpopulations-Berichte",
         "nameField": "Jahr",
@@ -375,7 +484,7 @@ var hierarchies = [
         "_id": "h32",
         "type": "hierarchy",
         "parent": "h21",
-        "projIds": ["o1o"],
+        "projId": "o1o",
         "order": 2,
         "name": "Populations-Berichte",
         "nameField": "Jahr",
@@ -404,7 +513,7 @@ var hierarchies = [
         "_id": "h22",
         "type": "hierarchy",
         "parent": "h11",
-        "projIds": ["o1o"],
+        "projId": "o1o",
         "order": 2,
         "name": "AP-Berichte",
         "nameField": "Jahr",
@@ -428,69 +537,68 @@ var hierarchies = [
                 "standardValue": ""
             }
         ]
-    },
-    {
-        "_id": "h111",
-        "type": "hierarchy",
-        "parent": "hh0",
-        "projIds": ["o10o"],
-        "order": 1,
-        "name": "Objekte",
-        "nameField": "Objektname",
-        "users": ["z@z.ch"],
-        "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
-        "fields": [
-            {
-                "label": "Objektname",
-                "inputType": "text",
-                "valueList": [],
-                "order": 1,
-                "inputDataType": "text",
-                "standardValue": ""
-            }
-        ]
-    },
-    {
-        "_id": "h121",
-        "type": "hierarchy",
-        "parent": "h111",
-        "projIds": ["o10o"],
-        "order": 1,
-        "name": "Teilobjekte",
-        "nameField": "Teilobjektname",
-        "users": ["z@z.ch"],
-        "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
-        "fields": [
-            {
-                "label": "Teilobjektname",
-                "inputType": "text",
-                "valueList": [],
-                "order": 1,
-                "inputDataType": "text",
-                "standardValue": ""
-            }
-        ]
     }
 ];
 
-nano.db.destroy('oi', function (err, body) {
-    if (err) { return console.log('err: ', err); }
-    console.log('oi destroyed');
-    nano.db.create('oi', function (err, body) {
+nano.db.destroy('project_o1o', function (err, body) {
+    // go on, if error 404 its o.k.
+    if (err) { console.log('err: ', err); }
+    console.log('database project_o1o destroyed');
+    nano.db.create('project_o1o', function (err, body) {
         if (err) { return console.log('err: ', err); }
-        console.log('oi created');
-        _.each(hierarchies, function (hierarchie) {
-            oi.insert(hierarchie, function (err, body) {
+        console.log('database project_o1o created');
+        var project_o1o = nano.use('project_o1o');
+        _.each(hierarchies_o1o, function (hierarchie) {
+            project_o1o.insert(hierarchie, function (err, body) {
                 if (err) { console.log('err: ', err); }
-                console.log('body: ', body);
+                console.log('hierarchies_o1o added');
             });
         });
 
-        _.each(objects, function (object) {
-            oi.insert(object, function (err, body) {
+        _.each(objects_o1o, function (object) {
+            project_o1o.insert(object, function (err, body) {
                 if (err) { console.log('err: ', err); }
-                console.log('body: ', body);
+                console.log('objects_o1o added');
             });
         });
+    });
+});
+
+nano.db.destroy('project_o10o', function (err, body) {
+    // go on, if error 404 its o.k.
+    if (err) { console.log('err: ', err); }
+    console.log('database project_o10o destroyed');
+    nano.db.create('project_o10o', function (err, body) {
+        if (err) { return console.log('err: ', err); }
+        console.log('database project_o10o created');
+        var project_o10o = nano.use('project_o10o');
+        _.each(hierarchies_o1o, function (hierarchie) {
+            project_o10o.insert(hierarchie, function (err, body) {
+                if (err) { console.log('err: ', err); }
+                console.log('hierarchies_o1o added');
+            });
+        });
+
+        _.each(objects_o1o, function (object) {
+            project_o10o.insert(object, function (err, body) {
+                if (err) { console.log('err: ', err); }
+                console.log('objects_o1o added');
+            });
+        });
+    });
+});
+
+// dem user die Rollen geben
+var userDb = nano.use('_users');
+userDb.get('org.couchdb.user:z@z.ch', function (err, user) {
+    if (user.roles.indexOf('project_o1o') === -1) {
+        user.roles.push('project_o1o');
+    }
+    if (user.roles.indexOf('project_o10o') === -1) {
+        user.roles.push('project_o10o');
+    }
+    userDb.insert(user, function (err, body) {
+        if (err) { console.log('error adding user roles: ', err); }
+        console.log('user roles added: ', body);
     });
 });
