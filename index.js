@@ -572,14 +572,14 @@ nano.db.destroy('project_o10o', function (err, body) {
         if (err) { return console.log('err: ', err); }
         console.log('database project_o10o created');
         var project_o10o = nano.use('project_o10o');
-        _.each(hierarchies_o1o, function (hierarchie) {
+        _.each(hierarchies_o10o, function (hierarchie) {
             project_o10o.insert(hierarchie, function (err, body) {
                 if (err) { console.log('err: ', err); }
                 console.log('hierarchies_o1o added');
             });
         });
 
-        _.each(objects_o1o, function (object) {
+        _.each(objects_o10o, function (object) {
             project_o10o.insert(object, function (err, body) {
                 if (err) { console.log('err: ', err); }
                 console.log('objects_o1o added');
