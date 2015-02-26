@@ -151,7 +151,11 @@ var objects_o10o = [
         "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
-            "Teilobjektname": "vorne links"
+            "Teilobjektname": "vorne links",
+            "Geometrie": {
+                "type": "Point",
+                "coordinates": [902568.5270415349, 5969980.338127118]
+            }
         }
     }
 ];
@@ -256,6 +260,14 @@ var hierarchies_o10o = [
                 "order": 1,
                 "inputDataType": "text",
                 "standardValue": ""
+            },
+            {
+                "label": "Geometrie",
+                "inputType": "geoJson",
+                "valueList": ["Polygon"],
+                "order": 1,
+                "inputDataType": null,
+                "standardValue": "Polygon"
             }
         ]
     }
