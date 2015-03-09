@@ -154,7 +154,27 @@ var objects_o10o = [
             "Teilobjektname": "vorne links",
             "Geometrie": {
                 "type": "Point",
-                "coordinates": [902568.5270415349, 5969980.338127118]
+                "coordinates": [902568, 5969980]
+            },
+            "Geometrie2": {
+                "type": "Point",
+                "coordinates": [902668, 5969990]
+            }
+        }
+    },
+    {
+        "_id": "o14o",
+        "type": "object",
+        "hId": "h121",
+        "parent": "o12o",
+        "projId": "o10o",
+        "users": ["z@z.ch"],
+        "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
+        "data": {
+            "Teilobjektname": "vorne rechts",
+            "Geometrie": {
+                "type": "LineString",
+                "coordinates": [[902568, 5969980], [904380, 5969241]]
             }
         }
     }
@@ -265,7 +285,15 @@ var hierarchies_o10o = [
                 "label": "Geometrie",
                 "inputType": "geoJson",
                 "valueList": ["Polygon"],
-                "order": 1,
+                "order": 2,
+                "inputDataType": null,
+                "standardValue": "Polygon"
+            },
+            {
+                "label": "Geometrie2",
+                "inputType": "geoJson",
+                "valueList": ["Polygon"],
+                "order": 3,
                 "inputDataType": null,
                 "standardValue": "Polygon"
             }
