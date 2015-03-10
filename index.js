@@ -1,11 +1,18 @@
 /*jslint node: true, browser: true, nomen: true, todo: true */
 'use strict';
 
-var nano = require('nano')('http://barbalex:dLhdMg12@127.0.0.1:5984'),
-    oiDb = nano.use('oi'),
-    _    = require('underscore');
+var _          = require('underscore'),
+    nano       = require('nano')('http://barbalex:dLhdMg12@127.0.0.1:5984'),
+    userName   = 'z@z.ch',
+    userDbName = 'user_' + userName,
+    userDb,
+    _usersDb,
+    objects_o1o,
+    objects_o10o,
+    hierarchies_o10o,
+    hierarchies_o1o;
 
-var objects_o1o = [
+objects_o1o = [
     {
         "_id": "o1o",
         "type": "object",
@@ -116,7 +123,7 @@ var objects_o1o = [
     }
 ];
 
-var objects_o10o = [
+objects_o10o = [
     {
         "_id": "o10o",
         "type": "object",
@@ -180,7 +187,7 @@ var objects_o10o = [
     }
 ];
 
-var hierarchies_o10o = [
+hierarchies_o10o = [
     {
         "_id": "hh0",
         "type": "hierarchy",
@@ -301,7 +308,7 @@ var hierarchies_o10o = [
     }
 ];
 
-var hierarchies_o1o = [
+hierarchies_o1o = [
     {
         "_id": "hh0",
         "type": "hierarchy",
@@ -629,16 +636,44 @@ nano.db.destroy('project_o10o', function (err, body) {
 });
 
 // dem user die Rollen geben
-var userDb = nano.use('_users');
-userDb.get('org.couchdb.user:z@z.ch', function (err, user) {
-    if (user.roles.indexOf('project_o1o') === -1) {
-        user.roles.push('project_o1o');
+_usersDb = nano.use('_users');
+_usersDb.get('org.couchdb.user:z@z.ch', function (err, userDoc) {
+    if (userDoc.roles.indexOf('project_o1o') === -1) {
+        userDoc.roles.push('project_o1o');
     }
-    if (user.roles.indexOf('project_o10o') === -1) {
-        user.roles.push('project_o10o');
+    if (userDoc.roles.indexOf('project_o10o') === -1) {
+        userDoc.roles.push('project_o10o');
     }
-    userDb.insert(user, function (err, body) {
+    _usersDb.insert(userDoc, function (err, body) {
         if (err) { console.log('error adding user roles: ', err); }
         console.log('user roles added: ', body);
+    });
+    // userDb schaffen
+    nano.db.create(userDbName, function (err) {
+        if (err) { return console.log('error creating new user database ' + userDbName + ': ', err); }
+
+        console.log('change: created new user db: ', userDbName);
+
+        // set up read permissions for the user
+        // create security doc
+        var securityDoc           = {};
+        securityDoc.admins        = {};
+        securityDoc.admins.names  = [];
+        securityDoc.admins.roles  = [];
+        securityDoc.members       = {};
+        securityDoc.members.names = [userName];
+        securityDoc.members.roles = [];
+        userDb = nano.use(userDbName);
+        userDb.insert(securityDoc, '_security', function (err, body) {
+            if (err) { return console.log('error setting _security in new user DB: ', err); }
+            //console.log('answer from setting _security in new user DB: ', body);
+        });
+
+        // add the user as doc, without rev
+        delete userDoc.rev;
+        userDb.insert(userDoc, function (err, body) {
+            if (err) { return console.log('error adding user doc to new user DB ' + userDbName + ': ', err); }
+            //console.log('answer from adding user doc to new user DB: ', body);
+        });
     });
 });
