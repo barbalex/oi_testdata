@@ -37,7 +37,6 @@ objects_o1o = [
         "hId": "h11",
         "parent": "o1o",
         "projId": "o1o",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
             "Art": 100,
@@ -50,7 +49,6 @@ objects_o1o = [
         "hId": "h21",
         "parent": "o2o",
         "projId": "o1o",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
             "Name": "Niederhasli, Mettmenhaslisee",
@@ -63,7 +61,6 @@ objects_o1o = [
         "hId": "h22",
         "parent": "o2o",
         "projId": "o1o",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
             "Jahr": 2014,
@@ -76,7 +73,6 @@ objects_o1o = [
         "hId": "h31",
         "parent": "o3o",
         "projId": "o1o",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
             "Nr": 1,
@@ -89,7 +85,6 @@ objects_o1o = [
         "hId": "h31",
         "parent": "o3o",
         "projId": "o1o",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
             "Nr": 1,
@@ -102,7 +97,6 @@ objects_o1o = [
         "hId": "h32",
         "parent": "o3o",
         "projId": "o1o",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
             "Jahr": 2009,
@@ -115,7 +109,6 @@ objects_o1o = [
         "hId": "h41",
         "parent": "o5o",
         "projId": "o1o",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
             "Jahr": 2009,
@@ -144,7 +137,6 @@ objects_o10o = [
         "hId": "h111",
         "parent": "o10o",
         "projId": "o10o",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
             "Objektname": "Neeracherriet"
@@ -156,7 +148,6 @@ objects_o10o = [
         "hId": "h121",
         "parent": "o12o",
         "projId": "o10o",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
             "Teilobjektname": "vorne links",
@@ -176,7 +167,6 @@ objects_o10o = [
         "hId": "h121",
         "parent": "o12o",
         "projId": "o10o",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "data": {
             "Teilobjektname": "vorne rechts",
@@ -196,7 +186,6 @@ hierarchies_o10o = [
         "projId": "o10o",
         "name": "Projekte",
         "nameField": "Projektname",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -257,7 +246,6 @@ hierarchies_o10o = [
         "order": 1,
         "name": "Objekte",
         "nameField": "Objektname",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -278,7 +266,6 @@ hierarchies_o10o = [
         "order": 1,
         "name": "Teilobjekte",
         "nameField": "Teilobjektname",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -317,7 +304,6 @@ hierarchies_o1o = [
         "projId": "o1o",
         "name": "Projekte",
         "nameField": "Projektname",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -378,7 +364,6 @@ hierarchies_o1o = [
         "order": 1,
         "name": "Programme",
         "nameField": "Art",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -407,7 +392,6 @@ hierarchies_o1o = [
         "order": 1,
         "name": "Populationen",
         "nameField": "Name",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -436,7 +420,6 @@ hierarchies_o1o = [
         "order": 1,
         "name": "Teilpopulationen",
         "nameField": "Flurname",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -465,7 +448,6 @@ hierarchies_o1o = [
         "order": 1,
         "name": "Massnahmen",
         "nameField": "Jahr",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -494,7 +476,6 @@ hierarchies_o1o = [
         "order": 2,
         "name": "Feldkontrollen",
         "nameField": "Jahr",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -515,7 +496,6 @@ hierarchies_o1o = [
         "order": 3,
         "name": "Teilpopulations-Berichte",
         "nameField": "Jahr",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -536,7 +516,6 @@ hierarchies_o1o = [
         "order": 2,
         "name": "Populations-Berichte",
         "nameField": "Jahr",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
@@ -565,7 +544,6 @@ hierarchies_o1o = [
         "order": 2,
         "name": "AP-Berichte",
         "nameField": "Jahr",
-        "users": ["z@z.ch"],
         "lastEdited": {"date": "02.01.2015", "user": "z@z.ch", "database": null},
         "fields": [
             {
