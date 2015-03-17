@@ -590,14 +590,14 @@ nano.db.destroy('project_o1o', function (err, body) {
         _.each(hierarchies_o1o, function (hierarchie) {
             project_o1o.insert(hierarchie, function (err, body) {
                 if (err) { console.log('err: ', err); }
-                console.log('hierarchies_o1o added');
+                //console.log('hierarchies_o1o added');
             });
         });
 
         _.each(objects_o1o, function (object) {
             project_o1o.insert(object, function (err, body) {
                 if (err) { console.log('err: ', err); }
-                console.log('objects_o1o added');
+                //console.log('objects_o1o added');
             });
         });
 
@@ -622,14 +622,14 @@ nano.db.destroy('project_o10o', function (err, body) {
         _.each(hierarchies_o10o, function (hierarchie) {
             project_o10o.insert(hierarchie, function (err, body) {
                 if (err) { console.log('err: ', err); }
-                console.log('hierarchies_o1o added');
+                //console.log('hierarchies_o1o added');
             });
         });
 
         _.each(objects_o10o, function (object) {
             project_o10o.insert(object, function (err, body) {
                 if (err) { console.log('err: ', err); }
-                console.log('objects_o1o added');
+                //console.log('objects_o1o added');
             });
         });
 
@@ -684,7 +684,7 @@ _usersDb.get('org.couchdb.user:z@z.ch', function (err, userDoc) {
 });
 
 // message db schaffen
-messageDbName = 'oiMessages';
+messageDbName = 'oi_messages';
 nano.db.destroy(messageDbName, function (err, body) {
     // ignore errors
     nano.db.create(messageDbName, function (err) {
