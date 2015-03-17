@@ -13,7 +13,7 @@
 var _                 = require('underscore'),
     createSecurityDoc = require('./modules/createSecurityDoc'),
     nano              = require('nano')('http://barbalex:dLhdMg12@127.0.0.1:5984'),
-    userName          = 'z__at__z__p__ch',
+    userName          = 'z_at_z_p_ch',
     userDbName        = 'user_' + userName,
     userDb,
     _usersDb,
