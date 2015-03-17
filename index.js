@@ -1,17 +1,30 @@
+/*
+ * sets up:
+ * - two project db's with test data for oi
+ * - the message db that is required to pass messages between the server and the app
+ *   via it's change stream
+ * - the user db for z@z.ch
+ *   it is needed primarily to sync the user's roles
+ */
+
 /*jslint node: true, browser: true, nomen: true, todo: true */
 'use strict';
 
-var _          = require('underscore'),
-    nano       = require('nano')('http://barbalex:dLhdMg12@127.0.0.1:5984'),
-    userName   = 'z__at__z__p__ch',
-    userDbName = 'user_' + userName,
+var _                 = require('underscore'),
+    createSecurityDoc = require('./modules/createSecurityDoc'),
+    nano              = require('nano')('http://barbalex:dLhdMg12@127.0.0.1:5984'),
+    userName          = 'z__at__z__p__ch',
+    userDbName        = 'user_' + userName,
     userDb,
     _usersDb,
     objects_o1o,
     objects_o10o,
+    project_o1o,
+    project_o10o,
     hierarchies_o10o,
     hierarchies_o1o,
-    securityDoc;
+    securityDoc,
+    messageDbName;
 
 objects_o1o = [
     {
@@ -573,7 +586,7 @@ nano.db.destroy('project_o1o', function (err, body) {
     nano.db.create('project_o1o', function (err, body) {
         if (err) { return console.log('err: ', err); }
         console.log('database project_o1o created');
-        var project_o1o = nano.use('project_o1o');
+        project_o1o = nano.use('project_o1o');
         _.each(hierarchies_o1o, function (hierarchie) {
             project_o1o.insert(hierarchie, function (err, body) {
                 if (err) { console.log('err: ', err); }
@@ -590,13 +603,7 @@ nano.db.destroy('project_o1o', function (err, body) {
 
         // set up read permissions for the role
         // create security doc
-        securityDoc               = {};
-        securityDoc.admins        = {};
-        securityDoc.admins.names  = [];
-        securityDoc.admins.roles  = [];
-        securityDoc.members       = {};
-        securityDoc.members.names = ['project_o1o'];
-        securityDoc.members.roles = [];
+        securityDoc = createSecurityDoc(null, 'project_o1o', 'barbalex');
         project_o1o.insert(securityDoc, '_security', function (err, body) {
             if (err) { return console.log('error setting _security in new user DB: ', err); }
             //console.log('answer from setting _security in new user DB: ', body);
@@ -611,7 +618,7 @@ nano.db.destroy('project_o10o', function (err, body) {
     nano.db.create('project_o10o', function (err, body) {
         if (err) { return console.log('err: ', err); }
         console.log('database project_o10o created');
-        var project_o10o = nano.use('project_o10o');
+        project_o10o = nano.use('project_o10o');
         _.each(hierarchies_o10o, function (hierarchie) {
             project_o10o.insert(hierarchie, function (err, body) {
                 if (err) { console.log('err: ', err); }
@@ -626,15 +633,9 @@ nano.db.destroy('project_o10o', function (err, body) {
             });
         });
 
-        // set up read permissions for the role
+        // set up permissions for the role
         // create security doc
-        securityDoc               = {};
-        securityDoc.admins        = {};
-        securityDoc.admins.names  = [];
-        securityDoc.admins.roles  = [];
-        securityDoc.members       = {};
-        securityDoc.members.names = ['project_o10o'];
-        securityDoc.members.roles = [];
+        securityDoc = createSecurityDoc(null, 'project_o10o', 'barbalex');
         project_o10o.insert(securityDoc, '_security', function (err, body) {
             if (err) { return console.log('error setting _security in new user DB: ', err); }
             //console.log('answer from setting _security in new user DB: ', body);
@@ -665,13 +666,7 @@ _usersDb.get('org.couchdb.user:z@z.ch', function (err, userDoc) {
 
             // set up read permissions for the user
             // create security doc
-            var securityDoc           = {};
-            securityDoc.admins        = {};
-            securityDoc.admins.names  = [];
-            securityDoc.admins.roles  = [];
-            securityDoc.members       = {};
-            securityDoc.members.names = [userName];
-            securityDoc.members.roles = [];
+            securityDoc = createSecurityDoc(userName, null, 'barbalex');
             userDb = nano.use(userDbName);
             userDb.insert(securityDoc, '_security', function (err, body) {
                 if (err) { return console.log('error setting _security in new user DB: ', err); }
@@ -684,6 +679,26 @@ _usersDb.get('org.couchdb.user:z@z.ch', function (err, userDoc) {
                 if (err) { return console.log('error adding user doc to new user DB ' + userDbName + ': ', err); }
                 //console.log('answer from adding user doc to new user DB: ', body);
             });
+        });
+    });
+});
+
+// message db schaffen
+messageDbName = 'oiMessages';
+nano.db.destroy(messageDbName, function (err, body) {
+    // ignore errors
+    nano.db.create(messageDbName, function (err) {
+        if (err) { return console.log('error creating new message database ' + messageDbName + ': ', err); }
+
+        console.log('change: created new message db: ', messageDbName);
+
+        // set up read permissions for the user
+        // create security doc
+        securityDoc = createSecurityDoc(userName, null, 'barbalex');
+        userDb = nano.use(messageDbName);
+        userDb.insert(securityDoc, '_security', function (err, body) {
+            if (err) { return console.log('error setting _security in new message DB: ', err); }
+            //console.log('answer from setting _security in new user DB: ', body);
         });
     });
 });
