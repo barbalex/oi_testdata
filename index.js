@@ -17,6 +17,7 @@ var _                 = require('underscore'),
     userDbName        = 'user_' + userName,
     userDb,
     _usersDb,
+    oi_messagesDb,
     objects_o1o,
     objects_o10o,
     project_o1o,
@@ -694,9 +695,9 @@ nano.db.destroy(messageDbName, function (err, body) {
 
         // set up read permissions for the user
         // create security doc
-        securityDoc = createSecurityDoc(userName, null, 'barbalex');
-        userDb = nano.use(messageDbName);
-        userDb.insert(securityDoc, '_security', function (err, body) {
+        securityDoc   = createSecurityDoc(null, null, 'barbalex');
+        oi_messagesDb = nano.use(messageDbName);
+        oi_messagesDb.insert(securityDoc, '_security', function (err, body) {
             if (err) { return console.log('error setting _security in new message DB: ', err); }
             //console.log('answer from setting _security in new user DB: ', body);
         });
