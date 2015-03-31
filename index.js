@@ -667,8 +667,8 @@ _usersDb.get('org.couchdb.user:z@z.ch', function (err, userDoc) {
 
             // set up read permissions for the user
             // create security doc
-            securityDoc = createSecurityDoc(userName, null, 'barbalex');
-            userDb = nano.use(userDbName);
+            securityDoc = createSecurityDoc('z@z.ch', null, 'barbalex');
+            userDb      = nano.use(userDbName);
             userDb.insert(securityDoc, '_security', function (err, body) {
                 if (err) { return console.log('error setting _security in new user DB: ', err); }
                 //console.log('answer from setting _security in new user DB: ', body);
