@@ -167,11 +167,11 @@ objects_o10o = [
             "Teilobjektname": "vorne links",
             "Geometrie": {
                 "type": "Point",
-                "coordinates": [902568, 5969980]
+                "coordinates": [2686568, 1239980]
             },
             "Geometrie2": {
                 "type": "Point",
-                "coordinates": [902668, 5969990]
+                "coordinates": [2686668, 1239990]
             }
         }
     },
@@ -186,7 +186,7 @@ objects_o10o = [
             "Teilobjektname": "vorne rechts",
             "Geometrie": {
                 "type": "LineString",
-                "coordinates": [[902568, 5969980], [904380, 5969241]]
+                "coordinates": [[2686568, 1239980], [2666380, 1239241]]
             }
         }
     }
