@@ -12,7 +12,9 @@
 
 var _ = require('underscore'),
   createSecurityDoc = require('./modules/createSecurityDoc'),
-  nano = require('nano')('http://barbalex:dLhdMg12@127.0.0.1:5984'),
+  couchPassfile = require('./couchpass.json'),
+  dbUrl = 'http://' + couchPassfile.user + ':' + couchPassfile.pass + '@127.0.0.1:5984',
+  nano = require('nano')(dbUrl),
   userName = 'z_at_z_p_ch',
   userDbName = 'user_' + userName,
   userDb,
@@ -580,7 +582,7 @@ hierarchies_o1o = [
   }
 ]
 
-nano.db.destroy('project_o1o', function (err, body) {
+nano.db.destroy('project_o1o', function (err, body) {  // eslint-disable-line handle-callback-err
   // go on, if error 404 its o.k.
   // if (err) { console.log('err: ', err); }
   console.log('database project_o1o destroyed')
@@ -604,7 +606,7 @@ nano.db.destroy('project_o1o', function (err, body) {
 
     // set up read permissions for the role
     // create security doc
-    securityDoc = createSecurityDoc(null, 'project_o1o', 'barbalex')
+    securityDoc = createSecurityDoc(null, 'project_o1o', couchPassfile.user)
     project_o1o.insert(securityDoc, '_security', function (err, body) {
       if (err) { return console.log('error setting _security in new user DB: ', err) }
     // console.log('answer from setting _security in new user DB: ', body)
@@ -612,7 +614,7 @@ nano.db.destroy('project_o1o', function (err, body) {
   })
 })
 
-nano.db.destroy('project_o10o', function (err, body) {
+nano.db.destroy('project_o10o', function (err, body) {  // eslint-disable-line handle-callback-err
   // go on, if error 404 its o.k.
   // if (err) { console.log('err: ', err); }
   console.log('database project_o10o destroyed')
@@ -636,7 +638,7 @@ nano.db.destroy('project_o10o', function (err, body) {
 
     // set up permissions for the role
     // create security doc
-    securityDoc = createSecurityDoc(null, 'project_o10o', 'barbalex')
+    securityDoc = createSecurityDoc(null, 'project_o10o', couchPassfile.user)
     project_o10o.insert(securityDoc, '_security', function (err, body) {
       if (err) { return console.log('error setting _security in new user DB: ', err) }
     // console.log('answer from setting _security in new user DB: ', body)
@@ -647,6 +649,7 @@ nano.db.destroy('project_o10o', function (err, body) {
 // dem user die Rollen geben
 _usersDb = nano.use('_users')
 _usersDb.get('org.couchdb.user:z@z.ch', function (err, userDoc) {
+  if (err) { return console.log('error setting userDoc.roles new user DB: ', err) }
   if (userDoc.roles.indexOf('project_o1o') === -1) {
     userDoc.roles.push('project_o1o')
   }
@@ -658,7 +661,7 @@ _usersDb.get('org.couchdb.user:z@z.ch', function (err, userDoc) {
     console.log('user roles added: ', body)
   })
   // userDb schaffen
-  nano.db.destroy(userDbName, function (err, body) {
+  nano.db.destroy(userDbName, function (err, body) {  // eslint-disable-line handle-callback-err
     // ignore errors
     nano.db.create(userDbName, function (err) {
       if (err) { return console.log('error creating new user database ' + userDbName + ': ', err) }
@@ -667,7 +670,7 @@ _usersDb.get('org.couchdb.user:z@z.ch', function (err, userDoc) {
 
       // set up read permissions for the user
       // create security doc
-      securityDoc = createSecurityDoc('z@z.ch', null, 'barbalex')
+      securityDoc = createSecurityDoc('z@z.ch', null, couchPassfile.user)
       userDb = nano.use(userDbName)
       userDb.insert(securityDoc, '_security', function (err, body) {
         if (err) { return console.log('error setting _security in new user DB: ', err) }
@@ -686,7 +689,7 @@ _usersDb.get('org.couchdb.user:z@z.ch', function (err, userDoc) {
 
 // message db schaffen
 messageDbName = 'oi_messages'
-nano.db.destroy(messageDbName, function (err, body) {
+nano.db.destroy(messageDbName, function (err, body) {  // eslint-disable-line handle-callback-err
   // ignore errors
   nano.db.create(messageDbName, function (err) {
     if (err) { return console.log('error creating new message database ' + messageDbName + ': ', err) }
@@ -695,7 +698,7 @@ nano.db.destroy(messageDbName, function (err, body) {
 
     // set up read permissions for the user
     // create security doc
-    securityDoc = createSecurityDoc(null, null, 'barbalex')
+    securityDoc = createSecurityDoc(null, null, couchPassfile.user)
     oi_messagesDb = nano.use(messageDbName)
     oi_messagesDb.insert(securityDoc, '_security', function (err, body) {
       if (err) { return console.log('error setting _security in new message DB: ', err) }
